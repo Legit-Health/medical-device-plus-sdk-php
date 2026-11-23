@@ -144,7 +144,7 @@ openssl ecparam -name prime256v1 -genkey -noout -out app-backend-staging.key
 openssl pkey -in app-backend-staging.key -pubout -out app-backend-staging.pub
 ```
 
-For app-backend, the staging private key is in AWS SSM Parameter Store (eu-west-3) as the SecureString `/app/backend/pre/LEGIT_HEALTH_PLUS_PRIVATE_KEY`, encoded in base64 on one line. `Es256Key::fromPem()` accepts it as is.
+For app-backend, the private keys are in AWS SSM Parameter Store (eu-west-3) as SecureStrings, encoded in base64 on one line: `/app/backend/pre/LEGIT_HEALTH_PLUS_PRIVATE_KEY` for staging and `/app/backend/pro/LEGIT_HEALTH_PLUS_PRIVATE_KEY` for production. `Es256Key::fromPem()` accepts them as they are.
 
 The DPoP key is a different key and is not registered anywhere: the SDK generates a new one with every token.
 
