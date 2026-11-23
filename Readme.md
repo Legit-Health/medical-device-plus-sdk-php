@@ -91,7 +91,7 @@ Plus has no login of its own. Tokens come from the shared authorization server (
   - `client_assertion=<JWT>`
 - `client_assertion`: JWT signed ES256 with the client key. Claims: `iss` and `sub` = `app-backend`, `aud` = the exact issuer URL (not the token endpoint), random `jti`, `iat` = now and `exp` = `iat` + 60.
 - The token request also carries a `DPoP` header (RFC 9449) signed with another P-256 key, the DPoP key. It is built as in point 2, without `ath`, with `htm=POST` and `htu` = the token endpoint.
-- Response: `access_token`, `token_type: DPoP` and `expires_in: 300`. No refresh token: ask for a new one when less than 30 s are left. The token is bound to the DPoP key, so cache both together; PHP-FPM workers do not share memory.
+- Response: `access_token`, `token_type: DPoP` and `expires_in: 300`. In the access token, `scope` lists only `diagnosis:write device:read`: the organisation granted by `organization:*` shows up in a separate `organization` claim (for app-backend, `["legit-health-app-backend"]`), and `cnf.jkt` binds the token to the DPoP key. No refresh token: ask for a new one when less than 30 s are left. The token is bound to the DPoP key, so cache both together; PHP-FPM workers do not share memory.
 
 ### 2. Sending the token to Plus
 
