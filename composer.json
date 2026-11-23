@@ -1,0 +1,52 @@
+{
+    "name": "legit-health/medical-device-plus-sdk",
+    "description": "SDK to integrate with Legit.Health Plus, the Legit.Health medical device API",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^8.4",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "psr/cache": "^2.0 || ^3.0",
+        "psr/clock": "^1.0",
+        "symfony/http-client": "^8.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpunit/phpunit": "^12.0",
+        "symfony/cache": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LegitHealth\\MedicalDevicePlus\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LegitHealth\\MedicalDevicePlus\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Legit.Health",
+            "homepage": "https://legit.health"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "stan": "vendor/bin/phpstan analyse --ansi --no-interaction",
+        "test": "vendor/bin/phpunit --testsuite unit",
+        "test-integration": "vendor/bin/phpunit --testsuite integration",
+        "ci": [
+            "@stan",
+            "@test"
+        ]
+    }
+}

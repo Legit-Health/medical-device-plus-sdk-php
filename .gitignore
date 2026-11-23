@@ -1,0 +1,6 @@
+vendor/
+coverage/
+.phpunit.cache/
+.env.local
+*.key
+*.pem
